@@ -15,7 +15,23 @@
     ```
     Error: "Ecoli.fna" genome file not found
     ```
-2.  **Caso: Archivo de picos vacío.**
+2.  **Caso: Archivo de genomas (FASTA) vacío.**
+    
+    -   **Entradas:**
+        -   Archivo de picos.
+        -   Archivo FASTA del genoma vacío.
+        -   Directorio de salida.
+    -   **Esperado:** `"Error: the genome file is empty or uncomplete."`
+
+ ```python
+    mk_fasta_from_peaks.py -i peak_file.txt -g Ecoli.fna -o fasta_peaks/ 
+```
+  
+```
+Error: the peak file is empty
+``` 
+
+3.  **Caso: Archivo de picos vacío.**
     
     -   **Entradas:**
         -   Archivo de picos vacío.
@@ -31,7 +47,7 @@
 Error: the peak file is empty
 ```
 
-3.  **Caso: Posiciones `Peak_start` y `Peak_end` fuera del rango del genoma.**
+4.  **Caso: Posiciones `Peak_start` y `Peak_end` fuera del rango del genoma.**
     
     -   **Entradas:**
         -   Archivo de picos con algunas posiciones `Peak_start` y `Peak_end` fuera del tamaño del genoma.
