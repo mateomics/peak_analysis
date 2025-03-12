@@ -1,8 +1,4 @@
-
-
-
 # Proyecto de Automatización para la Identificación de Sitios de Unión de Factores de Transcripción en E. coli en experimentos de ChIP-Seq
-** Python---> LCG, Sem2**
 
 Fecha: [10/03/2024]
 
@@ -40,6 +36,7 @@ Finalmente, el proyecto busca automatizar la extracción y el análisis de secue
 2.  **Extracción y Procesamiento de Secuencias:**
     -   Leer el archivo de picos para obtener las posiciones de inicio y fin de los picos asociados a cada `TF_name`.
     -   Extraer las secuencias desde el archivo FASTA del genoma utilizando las coordenadas `Peak_start` y `Peak_end` (desde el *inicio* hasta el *final*), asegurándose de considerar sólo la cadena *forward*.
+    -   Picos coherentes entre su tamaño: Inicio más pequeño que final, que habla de una correcta caracterización de la secuencia y de una lectura forward, como se busca.
  
 3.  **Generación de Archivos FASTA:**
     -   Crear archivos FASTA individuales---> Uno para cada `TF_name`. Los nombres de los archivos deben coincidir con el `TF_name` y usar la extensión `.fa`.
@@ -49,7 +46,7 @@ Finalmente, el proyecto busca automatizar la extracción y el análisis de secue
 #### B. *Automatización del Análisis de Motivos:**
      
 1.  **Entrada de Directorio:**
-    - Archivos con las secuencias de DNA de los picos de cada TF.
+    - Archivos en formato FASTA con las secuencias de DNA de los picos de cada TF.
     
 2.  **Generación de Script de Automatización:**   
     -   Iterar sobre cada archivo FASTA en el directorio proporcionado.
@@ -69,14 +66,13 @@ Finalmente, el proyecto busca automatizar la extracción y el análisis de secue
     -   El sistema debe ser ejecutable desde la línea de comandos en la terminal.
     -   Todos los datos de entrada a los programas deben pasarse vía argumentos.
     -   Si se implementa código, este debe ser en *python* o a manera de *scripts shell*.
-    -   Archivos FASTA generado con hasta 80 caracteres por línea, para mejorar legibilidad.
     
 -   **Calidad y Mantenimiento:**
     -   Utilización de *Git* para el seguimiento y revisión del código.
     - Repositorios vinculados de *Git* y *GitHub*
     - Pushs y sus respectivos commits de todos los cambios hechos a los documentos, de forma que se le pueda dar seguimiento.
     -   Documentación clara y comentarios efectivos deben acompañar todo el proyecto.
-    -   Deben realizarse pruebas las pruebas necesarias para la validación correcta del software.
+    -   Deben realizarse las pruebas necesarias para la validación correcta del software.
 
 
 
