@@ -2,6 +2,7 @@
 
 
 # Proyecto de Automatización para la Identificación de Sitios de Unión de Factores de Transcripción en E. coli en experimentos de ChIP-Seq
+** Python---> LCG, Sem2**
 
 Fecha: [10/03/2024]
 
