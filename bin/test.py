@@ -1,3 +1,4 @@
-with open('datos.txt', 'r') as file:
-    for linea in file:
-        print(linea.strip())
+genes = ('crp', 'rbs', 'gfp', 'lacY')
+
+for gen in genes:
+    print(f'El nombre del gen es: {gen}')
