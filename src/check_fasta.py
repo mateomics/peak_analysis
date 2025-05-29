@@ -11,10 +11,11 @@ Fecha: 2025-05-15
 import os
 import re
 
-def check_fasta_file(fasta_file): # Validar la existencia del archivo y directorio
+def check_fasta_file(fasta_file) -> int: # Validar la existencia del archivo y directorio
     """
     Verifica existencia y extensión del archivo FASTA. Llama a check_fasta_content() para validar el contenido.
-
+    Args:
+        fasta_file (str): Ruta del archivo FASTA a verificar.
     Returns:
         bool: True si pasa todas las pruebas, False en caso contrario.
     """
@@ -43,10 +44,11 @@ def check_fasta_file(fasta_file): # Validar la existencia del archivo y director
     return file_score
 
 
-def check_fasta_content(fasta_file):
+def check_fasta_content(fasta_file) -> bool:
     """
     Verifica el contenido del archivo FASTA para asegurarse de que tiene un formato válido.
-
+    Args:
+        fasta_file (str): Ruta del archivo FASTA a verificar.
     Returns:
         bool: True si el contenido es válido, False en caso contrario.
     """
