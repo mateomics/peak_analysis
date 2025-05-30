@@ -1,7 +1,3 @@
-
-
-
-
 # Proyecto de Automatización para la Extracción de Sitios de Unión de Factores de Transcripción en E. coli en experimentos de ChIP-Seq
 
 ## Resumen
@@ -66,3 +62,6 @@ options:
 ```
                         
 4. **Validación de errores por formato o extensión de los archivos**: Usar *dataframes*, *ifs*, *RegEx*
+
+
+NOTA: Creo que podrias cambiar un poco el orden de los pasos o como de la informacion, me refiero a en lugar de escribir lo de como usar el main en esta parte de argparse, podrias agregarlo como otro punto para que sea un poco mas legible, pero en general creo que todo lo demas esta bien
