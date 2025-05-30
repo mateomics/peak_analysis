@@ -1,5 +1,8 @@
 
-# Proyecto de Automatización para la Identificación de Sitios de Unión de Factores de Transcripción en E. coli en experimentos de ChIP-Seq
+
+
+
+# Proyecto de Automatización para la Extracción de Sitios de Unión de Factores de Transcripción en E. coli en experimentos de ChIP-Seq
 
 ## Resumen
 
@@ -8,6 +11,8 @@ Este proyecto tiene como objetivo automatizar el proceso de identificación del 
 ## Datos Disponibles
 
 ### Archivo de Picos
+> union_peaks_file.tsv
+
 Contiene información sobre las regiones de unión de los 144 factores de transcripción. Se organiza en las siguientes columnas:
 
 - **Dataset_Ids**: Identificadores de los datasets. Cada identificador representa un experimento o condición específica bajo la cual se identificaron los sitios de unión para el TF correspondiente.
@@ -23,28 +28,12 @@ Contiene información sobre las regiones de unión de los 144 factores de transc
 
 ### Genoma Completo de E. coli
 Disponible en formato FASTA.
+> E_coli_K12_MG1655_U00096.3.txt
 
 ## Objetivos del Proyecto
 
 ### Generación de Archivos FASTA
 Desarrollar un programa que extraiga y compile las secuencias de picos para cada TF en archivos individuales en formato FASTA. Cada archivo representará un regulador específico.
-
-### Automatización del Análisis de Motivos
-Crear un script que automatice la ejecución del software `meme` para cada archivo FASTA generado, facilitando la identificación de motivos en los sitios de unión.
-
-### Ejemplo de Comando para `meme`
-
-```bash
-meme AraC_peaks.fasta -oc AraC/. -mod oops -nmotifs 1 -minw 14 -maxw 20 -bfile ../U00096.3.bfile -dna -maxsize 100000 -norand -seed 10
-```
-
-## Colaboración y Recursos
-
-El proyecto será colaborativo, trabajando conjuntamente con un investigador que dispone de un servidor preparado para ejecutar el programa `meme`. Se compartirán los siguientes recursos con el colaborador:
-- Secuencias en formato FASTA de todos los TFs.
-- Archivo `U00096.3.fna`.
-- Script para la generación de archivos FASTA y la ejecución de `meme`.
-- URL del repositorio de GitHub donde se aloja el proyecto y el código, facilitando el feedback y las contribuciones de todos los colaboradores.
 
 ## Buenas Prácticas de Desarrollo
 
@@ -57,7 +46,23 @@ Para asegurar la calidad y mantenibilidad del software, el proyecto seguirá est
 
 ## Plan de Implementación
 
-1. **Desarrollo del Extractor de Secuencias**: Programación de la tarea que consiste en genera los archivos FASTA a partir del archivo de picos. Como es un proceso automatizado, todos la información requerida para ejecutar los programas debe ser por línea de comandos.
-2. **Automatización del Análisis con `meme`**: Scripting del proceso de ejecución del análisis de motivos para cada TF.
-3. **Integración y Pruebas**: Combinación de los módulos desarrollados y realización de pruebas integrales para asegurar la funcionalidad.
-4. **Despliegue y Capacitación**: Implementación del sistema en el servidor del colaborador y capacitación de usuarios sobre su uso.
+1. **Desarrollo del Extractor de Secuencias**: Programación de la tarea que consiste en generar los archivos FASTA a partir del archivo de picos. Como es un proceso automatizado, todos la información requerida para ejecutar los programas debe ser por línea de comandos.
+2. **Integración y Pruebas**: Combinación de los módulos desarrollados y realización de pruebas integrales para asegurar la funcionalidad.
+3. **Implementación de la librería Argparse**: Manejo de argumentos con la librería, usando argumentos opcionales para indicar las rutas de los archivos de input y del directorio de output.
+```
+	- usage: main.py [-h] [-fa FASTA] [-tsv TSV] [-o OUTPUT]
+
+Análisis de secuencias de unión en archivos FASTA, dado un TSV.
+
+options:
+  -h, --help            show this help message and exit
+  -fa FASTA, --fasta_file FASTA
+                        Ruta al archivo FASTA que contiene las secuencias genómicas.Por defecto: E_coli_K12_MG1655_U00096.3.txt en el directorio de datos.
+  -tsv TSV, --tsv_file TSV
+                        Ruta al archivo TSV que contiene los picos de unión.Por defecto: union_peaks_file.tsv en el directorio de datos.
+  -o OUTPUT, --output_dir OUTPUT
+                        Ruta al directorio donde se guardarán los resultados.Por defecto: results en el directorio del proyecto.
+                        
+```
+                        
+4. **Validación de errores por formato o extensión de los archivos**: Usar *dataframes*, *ifs*, *RegEx*

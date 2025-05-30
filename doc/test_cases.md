@@ -128,3 +128,28 @@ Error: missing arguments
 Error: negative difference between peaks
 ```
 ---
+
+### Errores
+> En el archivo FASTA
+- Archivos que cumplen todo pero **no coinciden con la longitud del TSV**
+	- ``python src/main.py -fa data/longitud_menor.fna -tsv data/union_peaks_file.tsv -o results/resultados_errores``
+
+- Archivos que **no tienen la extensión correcta** ---> *.txt* se permite porque el input del proyecto posee dicha extensión
+	- ``python src/main.py -fa data/extension_erronea.faa -tsv data/union_peaks_file.tsv -o results/resultados_errores``
+
+- Archivos que **no tienen el formato correcto** ---> Si no empiezan con *>*
+``python src/main.py -fa data/formato_erroneo.fasta -tsv data/union_peaks_file.tsv -o results/resultados_errores``
+
+> En el archivo TSV
+- Archivos que cumplen todo pero ``starts > ends`` 
+	- ``python src/main.py -fa data/E_coli_K12_MG1655_U00096.3.txt -tsv data/posiciones_erroneas.tsv -o results/resultados_errores``
+
+- Archivos que **no tienen la extensión correcta** ---> != *.tsv*
+	- ``python src/main.py -fa data/E_coli_K12_MG1655_U00096.3.txt -tsv data/extension_erronea.tss -o results/resultados_errores``
+
+- Archivos que **no tienen el formato correcto** 
+---> Si no tienen alguno de los **3** *Headers* requeridos: ``'TF_name', 'Peak_start', 'Peak_end'``
+	- ``python src/main.py -fa data/E_coli_K12_MG1655_U00096.3.txt -tsv data/formato_erroneo.tsv -o results/resultados_errores``
+
+	---> Si tienen los **3** *Headers* peroen orden incorrecto ---> Sí los valida:
+	- ``src/main.py -fa data/E_coli_K12_MG1655_U00096.3.txt -tsv data/columnas_cambiadas.tsv -o results/resultados_errores``

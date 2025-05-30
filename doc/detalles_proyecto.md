@@ -15,10 +15,12 @@ Los **factores de transcripción** son proteínas que regulan la expresión gén
 
 Por otro lado, un archivo FASTA es un formato de texto utilizado para almacenar secuencias biológicas, como ADN, ARN o proteínas. Cada entrada en un archivo FASTA consta de una línea de encabezado que comienza con el símbolo '>', seguida por la secuencia correspondiente en líneas posteriores. Este formato es ampliamente aceptado en herramientas bioinformáticas, facilitando así el manejo de grandes volúmenes de datos genómicos. En el contexto del proyecto, el uso de archivos FASTA permite organizar y analizar de forma eficiente las regiones del genoma donde se produce la unión de los TFs.
 
+---
 El software `meme`  (*Multiple Em for Motif Elicitation*) es una herramienta bioinformática diseñada para la identificación de *motivos* conservados dentro de secuencias biológicas. Un motivo es un patrón recurrente que puede indicar sitios de unión para factores de transcripción u otras secuencias funcionales relevantes. `meme`  utiliza algoritmos estadísticos para identificar estos patrones sin necesidad de información previa sobre sus características específicas, por lo que esta capacidad para encontrar motivos de forma no supervisada lo convierte en una herramienta valiosa para el análisis de la regulación génica.
 
 Finalmente, el proyecto busca automatizar la extracción y el análisis de secuencias genómicas donde los factores de transcripción se unen en _Escherichia coli_. Se cuenta con un archivo que contiene información sobre los picos de unión, y con otro archivo que posee la secuencia completa del genoma. El objetivo es generar archivos FASTA específicos para cada factor de transcripción (TF), agrupando las secuencias de los picos de unión correspondientes. Posteriormente, estas secuencias serán analizadas mediante el software `meme` para identificar motivos, por lo que se necesita generar un script `shell` con todas las instrucciones `meme`, usando las secuencias fasta de los picos de cada TF.
 
+---
 
 ## Especificación de Requisitos
 
@@ -44,6 +46,7 @@ Finalmente, el proyecto busca automatizar la extracción y el análisis de secue
 
 
 #### B. *Automatización del Análisis de Motivos:**
+> Pendiente por implementar
      
 1.  **Entrada de Directorio:**
     - Archivos en formato FASTA con las secuencias de DNA de los picos de cada TF.
@@ -77,6 +80,7 @@ Finalmente, el proyecto busca automatizar la extracción y el análisis de secue
 
 
 ### C. Descripción de Datos de Entrada y Salida 
+
 
 #### Formato del Archivo de Picos
 Este archivo contiene información crucial sobre las regiones de unión de los 144 factores de transcripción (TFs) en _Escherichia coli_. Los datos están organizados en columnas que permiten identificar detalles específicos sobre la unión de los TFs a lo largo del genoma. El formato del archivo y la descripción de cada columna se detallan a continuación:
@@ -177,6 +181,7 @@ Este archivo contiene información crucial sobre las regiones de unión de los 1
 ```
 ---
 #### Módulo 2: Automatizador del Análisis con `meme`
+> Pendiente por implementación
 
 **Objetivo:** Generar un script de shell que contenga todos los comandos necesarios para ejecutar `meme` en los archivos FASTA generados para cada factor de transcripción.
 
