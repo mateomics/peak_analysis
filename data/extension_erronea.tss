@@ -1,0 +1,15 @@
+	Dataset_Ids	TF_name	Peak_start	Peak_end	Peak_center	Peak_number	Max_Fold_Enrichment	Max_Norm_Fold_Enrichment	Proximal_genes	Center_position_type
+0	aaeR inducible 1,aaeR inducible 2	aaeR	3389342.0	3389658.0	3389500.0	1	68.21	1.0	aaeR,tldD	intergenic
+1	aaeR inducible 1,aaeR inducible 2	aaeR	2406963.0	2407345.0	2407192.0	2	59.48	1.0	alaA,lrhA	intergenic
+2	aaeR inducible 1,aaeR inducible 2	aaeR	2985455.0	2985799.0	2985636.0	3	51.0	0.861014	yqeF,yqeG	intergenic
+3	aaeR inducible 1,aaeR inducible 2	aaeR	52313.0	52557.0	52425.0	4	42.0	0.956533	apaH-apaG,apaH-apaG-rsmA	genic
+4	aaeR inducible 1,aaeR inducible 2	aaeR	4259119.0	4259374.0	4259257.0	5	30.19	0.559163	yjbJ,zur	genic
+5	aaeR inducible 1,aaeR inducible 2	aaeR	3004839.0	3005276.0	3005010.0	6	23.55	0.785618	xdhA-xdhB-xdhC,ygeV	genic
+6	aaeR inducible 1,aaeR inducible 2	aaeR	1894592.0	1894880.0	1894740.0	7	22.16	0.858063	pabB-nudL,yoaH	intergenic
+7	aaeR inducible 1,aaeR inducible 2	aaeR	4360717.0	4361004.0	4360857.0	8	22.04	0.707808	cadA-cadB,cadC	genic
+8	aaeR inducible 1,aaeR inducible 2	aaeR	3379897.0	3380156.0	3380042.0	9	21.91	0.761739	zapE	intergenic
+9	aaeR inducible 1,aaeR inducible 2	aaeR	1779216.0	1779512.0	1779394.0	10	20.73	0.309901	ydiP,ydiQ-ydiR-ydiS-ydiT-fadK	intergenic
+10	aaeR inducible 1,aaeR inducible 2	aaeR	571122.0	572209.0	571616.0	11	20.55	0.347733	ybcL-ybcM,ylcH	genic
+11	aaeR inducible 1,aaeR inducible 2	aaeR	1287626.0	1288124.0	1287794.0	12	20.24	0.784009	purU,tpr-tyrV-tyrT	genic
+12	aaeR inducible 1,aaeR inducible 2	aaeR	1525883.0	1526292.0	1526049.0	13	19.97	0.537966	ansP,yncG	intergenic
+13	aaeR inducible 1,aaeR inducible 2	aaeR	582893.0	583272.0	583097.0	14	19.14	0.431715	appY,tfaX	intergenic

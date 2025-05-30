@@ -14,9 +14,10 @@ import os
 def write_fasta(peak_sequences, results_dir) -> None:
     """
     Escribe las secuencias de unión en archivos FASTA separados, con salto de línea cada 80 nucleótidos.
-
     Args:
         peak_sequences: Diccionario con las secuencias de unión.
+    Returns:
+        None: Escribe los archivos FASTA en el directorio especificado.
     """
     for tf_name, sequences in peak_sequences.items(): # Iterar sobre cada TF y sus secuencias
         # Archivos FASTAs individuales
@@ -25,5 +26,5 @@ def write_fasta(peak_sequences, results_dir) -> None:
                 output_file.write(f'>{tf_name}_peak_{index + 1}\n')
                 for i in range(0, len(sequence), 80): # steps de 80 nucleótidos
                     output_file.write(f'{sequence[i:i + 80]}\n')
-    
-    print(f'Proceso completado. Se han escrito {len(peak_sequences)} archivos FASTA en el directorio de salida.')
+
+    print(f'Proceso completado. Se han escrito {len(peak_sequences)} archivos FASTA en el directorio de salida {results_dir}.')

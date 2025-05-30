@@ -7,40 +7,59 @@ Autor: Mateo Jiménez
 Fecha: 2025-05-15
 """
 
-import re
+import pandas as pd
 
 def peak_binding_sites(fasta_file, tsv_file) -> dict:
     """
-    Busca y devuelve los sitios de unión de picos en el archivo FASTA con base en el archivo tsv.
-
+    Extrae las secuencias de unión de picos desde un archivo FASTA con base en un TSV.
+    Utiliza dataframes de pandas para manejar los datos de manera eficiente al hacer operaciones
+    de filtrado y agrupamiento de forma vectorizada.
+    Args:
+        fasta_file (str): Ruta del archivo FASTA que contiene la secuencia del genoma.
+        tsv_file (str): Ruta del archivo TSV que contiene los picos y sus posiciones.
     Returns:
-        dict: TF name como key y secuencia de unión como value.
+        dict: Diccionario con las secuencias de unión agrupadas por nombre de factor de transcripción (TF_name).
     """
-    fasta_sequence = '' # string para almacenar la secuencia completa de corrido
     peak_sequences = {} # diccionario para almacenar las secuencias de unión
 
-    with open(fasta_file, 'r') as fasta_file:
-        for line in fasta_file:
-            if not line.startswith('>'):
-                fasta_sequence += line.strip().upper()
+    # Leer archivo FASTA
+    with open(fasta_file, 'r') as fasta_file: # Abrir archivo FASTA en modo lectura
+        fasta_sequence = ''.join(line.strip().upper() for line in fasta_file if not line.startswith('>')) # Ignorar encabezados y líneas vacías
 
-    with open(tsv_file, 'r') as tsv_file:
-        for line in tsv_file:
-            if re.match(r'^\s+\w*[a-zA-Z]\w*', line): # Si no es Header
-                continue
-            # Dividir la línea por tabulaciones
-            line = line.split('\t')
-            # Extraer los campos relevantes
-            tf_name, peak_start, peak_end = line[2], int(float(line[3])), int(float(line[4])) # porque tienen decimal
+    genome_length = len(fasta_sequence)
 
-            if peak_start > peak_end:
-                print(f'Error: el inicio del pico ({peak_start}) es mayor que el final ({peak_end}).\nSaltando...')
-                continue
-            peak_sequence = fasta_sequence[peak_start:peak_end + 1] # +1 porque el slice no incluye el último índice
+    # Leer archivo TSV
+    df = pd.read_csv(tsv_file, sep='\t', comment='#', header=0, usecols=['TF_name', 'Peak_start', 'Peak_end']) # Ignora comentarios y hace explícito el header
 
-            if tf_name in peak_sequences: # Si ya existe el TF en el diccionario
-                peak_sequences[tf_name].append(peak_sequence)
-            else:
-                peak_sequences[tf_name] = [peak_sequence]
-        
-        return peak_sequences
+    # Convertir a enteros
+    df['Peak_start'] = df['Peak_start'].astype(float).astype(int)
+    df['Peak_end'] = df['Peak_end'].astype(float).astype(int)
+
+    # Filtrar picos válidos
+    invalid_peaks = df[df['Peak_start'] > df['Peak_end']]
+    if not invalid_peaks.empty:
+        print(f"{len(invalid_peaks)} picos tienen Peak_start > Peak_end. Serán descartados del análisis.")
+
+    df = df[
+        (df['Peak_start'] >= 0) & # Starts positivos
+        (df['Peak_end'] < genome_length) & # Ends dentro del genoma del FASTA
+        (df['Peak_start'] <= df['Peak_end']) # No picos con inicio mayor que el final
+        ]
+    
+    df.columns = df.columns.str.strip() # Quita espacios en los nombres por cualquier cosa
+
+    # Verificar si hay picos válidos
+    if df.empty:
+        print("No se encontraron picos válidos en el archivo TSV. Asegúrese de que los picos estén dentro del rango del genoma.")
+        return peak_sequences  # Retorna un diccionario vacío si no hay picos válidos
+
+    # Extraer secuencias de unión
+    df['sequence'] = df.apply(
+        lambda row: fasta_sequence[row['Peak_start']:row['Peak_end'] + 1], # Slice para cada fila
+        axis=1 # Sobre cada fila, no columna
+    )
+
+    # Agrupar con key TF_name, value lista de secuencias
+    peak_sequences = df.groupby('TF_name')['sequence'].apply(list).to_dict() # Secuencias agrupadas por TF_name en listas
+
+    return peak_sequences

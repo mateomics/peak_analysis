@@ -21,6 +21,7 @@ def check_tsv_file(tsv_file) -> int:
     file_score = 0  # Inicializa el score del archivo
     message = f'El archivo {tsv_file}'
 
+    print('\t')
     if not os.path.isfile(tsv_file):  # Verifica si el archivo existe
         print(f'{message} no existe.')
         return file_score  # Si no existe, retorna 0 porque ni siquiera existe
@@ -35,9 +36,9 @@ def check_tsv_file(tsv_file) -> int:
 
     # Verificar el contenido del archivo
     if not check_tsv_content(tsv_file):
-        print(f'{message} no tiene un formato TSV válido.\n')
+        print(f'{message} no tiene un formato TSV válido.')
     else:
-        print(f'{message} tiene un formato TSV válido.\n')
+        print(f'{message} tiene un formato TSV válido.')
         file_score += 1
 
     return file_score
